@@ -1,0 +1,208 @@
+Build a comprehensive Polkadot governance tracking platform that enables
+users to monitor, analyze, and participate in the Polkadot governance ecosystem.
+
+Core Governance Features:
+- OpenGov Integration:
+  - Track all active referenda across different origins
+  - Monitor proposal lifecycle from submission to execution
+  - Real-time voting status and conviction tracking
+  - Support for multiple governance tracks (Root, Staking Admin, Treasurer, etc.)
+
+- Proposal Management:
+  - Detailed proposal information and metadata
+  - Proposal timeline and status updates
+  - Impact analysis and technical review
+  - Community discussion integration
+  - Historical proposal archive
+
+- Voting Analytics:
+  - Individual voting history by address
+  - Voting power calculation with conviction multipliers
+  - Delegate and proxy voting tracking
+  - Vote distribution analysis and statistics
+  - Turnout metrics and participation rates
+
+- Treasury Tracking:
+  - Active treasury proposals and spending requests
+  - Treasury balance and burn tracking
+  - Bounty and tip management
+  - Funding allocation analysis
+  - ROI tracking for funded projects
+
+Data Sources & APIs:
+- Polkadot.js API Integration:
+  - Real-time chain state queries for governance data
+  - Referendum and proposal event subscriptions
+  - Vote tracking and conviction calculations
+  - Treasury and council activity monitoring
+
+- Subscan Governance API:
+  - Historical governance data and analytics
+  - Detailed proposal and referendum information
+  - Voting history and delegate relationships
+  - Treasury spending and allocation data
+
+- Polkassembly Integration:
+  - Community discussions and comments
+  - Proposal descriptions and technical details
+  - User-generated content and analysis
+  - Social sentiment tracking
+
+Frontend Implementation (Vite + React + TypeScript):
+- Governance Dashboard:
+  - Active referenda overview with status indicators
+  - Upcoming and ongoing votes timeline
+  - Treasury balance and recent spending
+  - Network governance statistics
+
+- Proposal Explorer:
+  - Searchable and filterable proposal database
+  - Detailed proposal view with technical specs
+  - Voting progress bars and conviction tracking
+  - Community discussion integration
+
+- Voting Interface:
+  - User-friendly voting interface with wallet integration
+  - Conviction selection and voting power calculation
+  - Batch voting for multiple proposals
+  - Voting history and impact tracking
+
+- Analytics Dashboards:
+  - Governance participation metrics
+  - Voting patterns and trends analysis
+  - Treasury spending visualization
+  - Delegate performance tracking
+
+Advanced Features:
+- Notification System:
+  - Email/SMS alerts for new proposals
+  - Voting deadline reminders
+  - Proposal status change notifications
+  - Custom alert criteria and filtering
+
+- Delegation Tools:
+  - Delegate discovery and comparison
+  - Delegation management interface
+  - Delegate performance metrics
+  - Automatic delegation rules
+
+- Governance Insights:
+  - AI-powered proposal analysis
+  - Sentiment analysis of community discussions
+  - Predictive voting outcome modeling
+  - Impact assessment and recommendations
+
+- Multi-Chain Support:
+  - Polkadot relay chain governance
+  - Kusama canary network integration
+  - Parachain governance tracking
+  - Cross-chain governance coordination
+
+Technical Implementation:
+- Real-Time Updates:
+  - WebSocket connections for live governance data
+  - Event-driven updates for proposal changes
+  - Push notifications for mobile users
+  - Optimistic UI updates with rollback
+
+- Data Processing:
+  - Governance event indexing and storage
+  - Vote aggregation and statistical analysis
+  - Historical data archival and retrieval
+  - Performance optimization for large datasets
+
+- Wallet Integration:
+  - Polkadot.js extension support
+  - Hardware wallet compatibility (Ledger)
+  - Multi-signature account support
+  - Proxy account management
+
+Security & Privacy:
+- Voting Privacy:
+  - Optional anonymous voting tracking
+  - Privacy-preserving analytics
+  - Secure vote submission
+  - Data encryption and protection
+
+- Authentication:
+  - Wallet-based authentication
+  - Session management
+  - Role-based access control
+  - API rate limiting
+
+User Experience:
+- Educational Resources:
+  - Governance tutorial and guides
+  - Proposal evaluation frameworks
+  - Voting best practices
+  - Impact assessment tools
+
+- Accessibility:
+  - Mobile-responsive design
+  - Screen reader compatibility
+  - Multi-language support
+  - Simplified voting interfaces
+
+- Customization:
+  - Personal governance dashboard
+  - Custom notification preferences
+  - Watchlist and favorites
+  - Export and reporting tools
+
+Backend Services (Node.js + TypeScript):
+- Governance API:
+  - RESTful endpoints for governance data
+  - GraphQL for complex queries
+  - Real-time subscriptions
+  - Data caching and optimization
+
+- Event Processing:
+  - Blockchain event monitoring
+  - Data transformation and enrichment
+  - Background job processing
+  - Error handling and retry logic
+
+- Analytics Engine:
+  - Vote counting and statistics
+  - Trend analysis and predictions
+  - Performance metrics calculation
+  - Report generation
+
+Integration Features:
+- Third-Party Tools:
+  - Calendar integration for voting deadlines
+  - Email newsletter subscriptions
+  - Mobile app with push notifications
+  - Browser extension for quick access
+
+- Developer APIs:
+  - Public API for governance data
+  - Webhook endpoints for integrations
+  - SDK for third-party applications
+  - Documentation and examples
+
+Monitoring & Analytics:
+- Platform Metrics:
+  - User engagement tracking
+  - Feature usage analytics
+  - Performance monitoring
+  - Error tracking and alerting
+
+- Governance Insights:
+  - Participation trend analysis
+  - Proposal success rate tracking
+  - Voting behavior patterns
+  - Network health indicators
+
+Deployment & Scaling:
+- Infrastructure:
+  - Kubernetes deployment
+  - Auto-scaling capabilities
+  - Load balancing
+  - CDN integration
+
+- Monitoring:
+  - Application performance monitoring
+  - Blockchain node health checks
+  - Data integrity validation
+  - Uptime and availability tracking
