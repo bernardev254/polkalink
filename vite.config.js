@@ -7,6 +7,6 @@ export default defineConfig({
     global: 'globalThis',
   },
   optimizeDeps: {
-    include: ['@polkadot/api', '@polkadot/keyring', '@polkadot/util', '@polkadot/util-crypto']
+    include: ['@polkadot/api', '@polkadot/extension-dapp']
   }
 })
