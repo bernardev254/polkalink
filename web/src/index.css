@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 220 25% 97%;
+    --foreground: 230 25% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 230 25% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 230 25% 15%;
+
+    --primary: 262 83% 58%;
+    --primary-foreground: 0 0% 100%;
+    
+    --primary-glow: 262 95% 68%;
+    --primary-dark: 262 70% 48%;
+
+    --secondary: 199 89% 48%;
+    --secondary-foreground: 0 0% 100%;
+    
+    --secondary-glow: 199 89% 58%;
+
+    --muted: 220 15% 92%;
+    --muted-foreground: 220 10% 45%;
+
+    --accent: 262 83% 58%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --border: 220 15% 88%;
+    --input: 220 15% 90%;
+    --ring: 262 83% 58%;
+
+    --radius: 0.75rem;
+    
+    --gradient-primary: linear-gradient(135deg, hsl(262 83% 58%), hsl(199 89% 48%));
+    --gradient-hero: linear-gradient(135deg, hsl(262 83% 58%) 0%, hsl(262 70% 48%) 50%, hsl(199 89% 48%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100% / 0.95), hsl(0 0% 100% / 0.85));
+    
+    --shadow-glow: 0 8px 32px hsl(262 83% 58% / 0.2);
+    --shadow-card: 0 4px 16px hsl(220 25% 15% / 0.08);
+    
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
