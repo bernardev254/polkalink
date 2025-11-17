@@ -1,0 +1,24 @@
+[package]
+name = "data_verification"
+version = "0.1.0"
+license.workspace = true
+authors.workspace = true
+homepage.workspace = true
+repository.workspace = true
+edition.workspace = true
+
+[dependencies]
+codec = { features = ["derive"], workspace = true }
+scale-info = { features = ["derive"], workspace = true }
+frame-system = "43.0.0"
+frame-support = "43.0.0"
+partner_registry = { version = "0.1.0", path = "../partner_registry" }
+[features]
+default = ["std"]
+std = [
+    "codec/std",
+    "scale-info/std",
+    "frame-system/std",
+    "frame-support/std",
+    "partner_registry/std",
+]
