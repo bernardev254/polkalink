@@ -1,265 +1,242 @@
-<div align="center">
+# PolkaLink — A Decentralized Partner Data Network
 
-# Polkadot SDK's Parachain Template
+PolkaLink is a purpose-built blockchain designed for ecosystems where multiple organizations must share information, verify each other's claims, and maintain a trusted common ledger—without giving up autonomy or privacy.
 
-<img height="70px" alt="Polkadot SDK Logo" src="https://github.com/paritytech/polkadot-sdk/raw/master/docs/images/Polkadot_Logo_Horizontal_Pink_White.png#gh-dark-mode-only"/>
-<img height="70px" alt="Polkadot SDK Logo" src="https://github.com/paritytech/polkadot-sdk/raw/master/docs/images/Polkadot_Logo_Horizontal_Pink_Black.png#gh-light-mode-only"/>
+Built using the Polkadot SDK, PolkaLink provides a domain-specific chain for decentralized collaboration beyond traditional smart contract platforms.
 
-> This is a template for creating a [parachain](https://wiki.polkadot.network/docs/learn-parachains) based on Polkadot SDK.
->
-> This template is automatically updated after releases in the main [Polkadot SDK monorepo](https://github.com/paritytech/polkadot-sdk).
+##  Inspiration
 
-</div>
+Modern organizations collaborate constantly:
 
-## Table of Contents
+- Manufacturers ↔ Certifiers
+- Hospitals ↔ Regulators
+- Supply chains ↔ Auditors
+- Universities ↔ Accreditation bodies
 
-- [Intro](#intro)
+Yet despite depending on each other, these partners store data in isolated systems, leading to:
 
-- [Template Structure](#template-structure)
+- **Duplication** — Multiple copies of the same data
+- **Delayed communication** — Information gaps between partners
+- **Inconsistent records** — Version mismatches and conflicts
+- **Trust issues** — No single source of truth
+- **Manual verification overhead** — Time-consuming reconciliation processes
 
-- [Getting Started](#getting-started)
+### The Problem
 
-- [Starting a Development Chain](#starting-a-development-chain)
+Partners have shared information needs but no shared trusted infrastructure.
 
-  - [Omni Node](#omni-node-prerequisites)
-  - [Zombienet setup with Omni Node](#zombienet-setup-with-omni-node)
-  - [Parachain Template Node](#parachain-template-node)
-  - [Connect with the Polkadot-JS Apps Front-End](#connect-with-the-polkadot-js-apps-front-end)
-  - [Takeaways](#takeaways)
+Traditional smart contracts couldn't fully solve this. Real-world collaboration requires:
 
-- [Runtime development](#runtime-development)
-- [Contributing](#contributing)
-- [Getting Help](#getting-help)
+- Custom logic tailored to specific industries
+- Fine-grained role-based permissions
+- Data proofs and verification flows
+- On-chain identity layers
+- High interoperability
 
-## Intro
+Polkadot's architecture gave us exactly the flexibility needed to build a custom blockchain tailored to this problem.
 
-- ⏫ This template provides a starting point to build a [parachain](https://wiki.polkadot.network/docs/learn-parachains).
+## 🔍 What PolkaLink Does
 
-- ☁️ It is based on the
-  [Cumulus](https://paritytech.github.io/polkadot-sdk/master/polkadot_sdk_docs/polkadot_sdk/cumulus/index.html) framework.
+PolkaLink enables organizations to operate from a **single, verifiable source of truth**.
 
-- 🔧 Its runtime is configured with a single custom pallet as a starting point, and a handful of ready-made pallets
-  such as a [Balances pallet](https://paritytech.github.io/polkadot-sdk/master/pallet_balances/index.html).
+### Partners can:
 
-- 👉 Learn more about parachains [here](https://wiki.polkadot.network/docs/learn-parachains)
+- ✅ Register using on-chain roles
+- ✅ Submit data proofs (e.g., IPFS CIDs, document hashes)
+- ✅ Verify each other's data through authorized certifiers
+- ✅ Access shared data securely
+- ✅ Build collaborative workflows
 
-## Template Structure
+### All while retaining:
 
-A Polkadot SDK based project such as this one consists of:
+-  Data ownership
+-  Privacy
+-  Role-based permission controls
 
-- 🧮 the [Runtime](./runtime/README.md) - the core logic of the parachain.
-- 🎨 the [Pallets](./pallets/README.md) - from which the runtime is constructed.
-- 💿 a [Node](./node/README.md) - the binary application, not part of the project default-members list and not compiled unless
-  building the project with `--workspace` flag, which builds all workspace members, and is an alternative to
-  [Omni Node](https://paritytech.github.io/polkadot-sdk/master/polkadot_sdk_docs/reference_docs/omni_node/index.html).
+## Architecture
 
-## Getting Started
+PolkaLink is a custom Substrate-based blockchain with three major components:
 
-- 🦀 The template is using the Rust language.
+### 🔹 1. Partner Registry Pallet
 
-- 👉 Check the
-  [Rust installation instructions](https://www.rust-lang.org/tools/install) for your system.
+A lightweight identity module that allows organizations to register as:
 
-- 🛠️ Depending on your operating system and Rust version, there might be additional
-  packages required to compile this template - please take note of the Rust compiler output.
+- **Producer** — Creates or manufactures goods/data
+- **Auditor** — Reviews and audits partner activities
+- **Certifier** — Validates and certifies data authenticity
+- **Logistics Provider** — Manages supply chain and transport
+- **Retailer** — Distributes products to end consumers
 
-Fetch parachain template code:
+This creates a trusted partner network with role-level access control.
 
-```sh
-git clone https://github.com/paritytech/polkadot-sdk-parachain-template.git parachain-template
+### 🔹 2. Data Verification Pallet
 
-cd parachain-template
-```
+Partners can:
 
-## Starting a Development Chain
+- Submit hashed data references
+- Track verification status in real-time
+- Get validation from authorized certifiers
 
-The parachain template relies on a hardcoded parachain id which is defined in the runtime code
-and referenced throughout the contents of this file as `{{PARACHAIN_ID}}`. Please replace
-any command or file referencing this placeholder with the value of the `PARACHAIN_ID` constant:
+This enables decentralized ecosystems to collaborate around shared, trustworthy data without exposing sensitive information.
 
-```rust,ignore
-pub const PARACHAIN_ID: u32 = 1000;
-```
+### 🔹 3. React Frontend (Polkadot.js API)
 
-### Omni Node Prerequisites
+A user-friendly dashboard for:
 
-[Omni Node](https://paritytech.github.io/polkadot-sdk/master/polkadot_sdk_docs/reference_docs/omni_node/index.html) can
-be used to run the parachain template's runtime. `polkadot-omni-node` binary crate usage is described at a high-level
-[on crates.io](https://crates.io/crates/polkadot-omni-node).
+- Onboarding partners
+- Viewing registry roles
+- Submitting data proofs
+- Verifying or rejecting records
+- Tracking verification history
 
-#### Install `polkadot-omni-node`
+Designed to be simple, approachable, and expandable.
 
-Please see the installation section at [`crates.io/omni-node`](https://crates.io/crates/polkadot-omni-node).
+##  Built With
 
-#### Build `parachain-template-runtime`
+- **Rust** — Core blockchain runtime
+- **Substrate / Polkadot SDK** — Blockchain framework
+- **React** — Frontend interface
+- **Polkadot.js API** — Blockchain integration
+- **WASM Runtime** — On-chain execution
 
-```sh
-cargo build --profile production
-```
+##  Getting Started
 
-#### Install `staging-chain-spec-builder`
+### Prerequisites
 
-Please see the installation section at [`crates.io/staging-chain-spec-builder`](https://crates.io/crates/staging-chain-spec-builder).
+- [Rust](https://www.rust-lang.org/tools/install) (latest stable)
+- [Node.js](https://nodejs.org/) (v16 or higher)
+- [Substrate dependencies](https://docs.substrate.io/install/)
 
-#### Use `chain-spec-builder` to generate the `chain_spec.json` file
-
-```sh
-chain-spec-builder create --relay-chain "rococo-local" --para-id {{PARACHAIN_ID}} --runtime \
-    target/release/wbuild/parachain-template-runtime/parachain_template_runtime.wasm named-preset development
-```
-
-**Note**: the `relay-chain` and `para-id` flags are mandatory information required by
-Omni Node, and for parachain template case the value for `para-id` must be set to `{{PARACHAIN_ID}}`, since this
-is also the value injected through [ParachainInfo](https://docs.rs/staging-parachain-info/0.17.0/staging_parachain_info/)
-pallet into the `parachain-template-runtime`'s storage. The `relay-chain` value is set in accordance
-with the relay chain ID where this instantiation of parachain-template will connect to.
-
-#### Run Omni Node
-
-Start Omni Node with the generated chain spec. We'll start it in development mode (without a relay chain config), producing
-and finalizing blocks based on manual seal, configured below to seal a block with each second.
+### Running the Node
 
 ```bash
-polkadot-omni-node --chain <path/to/chain_spec.json> --dev --dev-block-time 1000
+# Clone the repository
+git clone https://github.com/bernadev254/polkalink.git
+cd polkalink
+
+# Build the node
+cargo build --release
+
+# Run the development node
+./target/release/node-template --dev
 ```
 
-However, such a setup is not close to what would run in production, and for that we need to setup a local
-relay chain network that will help with the block finalization. In this guide we'll setup a local relay chain
-as well. We'll not do it manually, by starting one node at a time, but we'll use [zombienet](https://paritytech.github.io/zombienet/intro.html).
+### Running the Frontend
 
-Follow through the next section for more details on how to do it.
+```bash
+# Navigate to frontend directory
+cd web
 
-### Zombienet setup with Omni Node
+# Install dependencies
+npm install
 
-Assuming we continue from the last step of the previous section, we have a chain spec and we need to setup a relay chain.
-We can install `zombienet` as described [here](https://paritytech.github.io/zombienet/install.html#installation), and
-`zombienet-omni-node.toml` contains the network specification we want to start.
-
-#### Relay chain prerequisites
-
-Download the `polkadot` (and the accompanying `polkadot-prepare-worker` and `polkadot-execute-worker`) binaries from
-[Polkadot SDK releases](https://github.com/paritytech/polkadot-sdk/releases). Then expose them on `PATH` like so:
-
-```sh
-export PATH="$PATH:<path/to/binaries>"
+# Start the development server
+npm run dev
 ```
 
-#### Update `zombienet-omni-node.toml` with a valid chain spec path
 
-To simplify the process of using the parachain-template with zombienet and Omni Node, we've added a pre-configured
-development chain spec (dev_chain_spec.json) to the parachain template. The zombienet-omni-node.toml file of this
-template points to it, but you can update it to an updated chain spec generated on your machine. To generate a
-chain spec refer to [staging-chain-spec-builder](https://crates.io/crates/staging-chain-spec-builder)
+##  Usage
 
-Then make the changes in the network specification like so:
+### 1. Register as a Partner
 
-```toml
-# ...
-[[parachains]]
-id = "<PARACHAIN_ID>"
-chain_spec_path = "<TO BE UPDATED WITH A VALID PATH>"
-# ...
-```
+Navigate to the Partner Registry section and select your organization role.
 
-#### Start the network
+### 2. Submit Data Proof
 
-```sh
-zombienet --provider native spawn zombienet-omni-node.toml
-```
+Upload a document hash or IPFS CID to create a verifiable data record.
 
-### Parachain Template Node
+### 3. Verify Data
 
-As mentioned in the `Template Structure` section, the `node` crate is optionally compiled and it is an alternative
-to `Omni Node`. Similarly, it requires setting up a relay chain, and we'll use `zombienet` once more.
+Authorized certifiers can review and approve submitted data proofs.
 
-#### Install the `parachain-template-node`
+### 4. Track History
 
-```sh
-cargo install --path node
-```
+View the complete verification timeline for any data record.
 
-#### Setup and start the network
+## Challenges We Overcame
 
-For setup, please consider the instructions for `zombienet` installation [here](https://paritytech.github.io/zombienet/install.html#installation)
-and [relay chain prerequisites](#relay-chain-prerequisites).
+Building something practical and realistic—not just another "blockchain for everything"—was our primary challenge.
 
-We're left just with starting the network:
+We balanced:
 
-```sh
-zombienet --provider native spawn zombienet.toml
-```
+- Simplicity vs functionality
+- Real-world relevance vs technical feasibility
+- Security vs performance
+- Hackathon time constraints
 
-### Connect with the Polkadot-JS Apps Front-End
+Technical challenges included:
 
-- 🌐 You can interact with your local node using the
-  hosted version of the Polkadot/Substrate Portal:
-  [relay chain](https://polkadot.js.org/apps/#/explorer?rpc=ws://localhost:9944)
-  and [parachain](https://polkadot.js.org/apps/#/explorer?rpc=ws://localhost:9988).
+- Cross-pallet dependency wiring
+- Handling runtime type mismatches (BlockNumber, bounded storage, EncodeLike)
+- Ensuring the chain stayed lightweight and composable
 
-- 🪐 A hosted version is also
-  available on [IPFS](https://dotapps.io/).
+##  Accomplishments
 
-- 🧑‍🔧 You can also find the source code and instructions for hosting your own instance in the
-  [`polkadot-js/apps`](https://github.com/polkadot-js/apps) repository.
+-  Fully working interaction between Partner Registry and Data Verification pallets
+-  Clean and extensible pallet architecture
+-  Smooth integration with Polkadot.js API on the frontend
+-  A practical use case that extends Polkadot beyond DeFi & NFTs
 
-### Takeaways
+##  What We Learned
 
-Development parachains:
+### Technical Growth:
 
-- 🔗 Connect to relay chains, and we showcased how to connect to a local one.
-- 🧹 Do not persist the state.
-- 💰 Are preconfigured with a genesis state that includes several prefunded development accounts.
-- 🧑‍⚖️ Development accounts are used as validators, collators, and `sudo` accounts.
+- Polkadot Parachain Templates
+- Runtime composition & pallet wiring
+- Cross-pallet communication patterns
+- Bounded types & storage design
+- RPC + Polkadot.js integration
+- Building domain-specific blockchains
 
-## Runtime development
+### Conceptual Understanding:
 
-We recommend using [`chopsticks`](https://github.com/AcalaNetwork/chopsticks) when the focus is more on the runtime
-development and `OmniNode` is enough as is.
+- Why some problems must be solved with custom blockchains
+- How decentralized data layers can power real-world ecosystems
+- How to design trust verification flows for multi-party networks
 
-### Install chopsticks
+##  Roadmap
 
-To use `chopsticks`, please install the latest version according to the installation [guide](https://github.com/AcalaNetwork/chopsticks?tab=readme-ov-file#install).
+### Short Term
 
-### Build a raw chain spec
+- [ ] Role-based data access permissions
+- [ ] Enhanced dashboard with analytics
+- [ ] Mobile-responsive UI improvements
 
-Build the `parachain-template-runtime` as mentioned before in this guide and use `chain-spec-builder`
-again but this time by passing `--raw-storage` flag:
+### Medium Term
 
-```sh
-chain-spec-builder create --raw-storage --relay-chain "rococo-local" --para-id {{PARACHAIN_ID}} --runtime \
-    target/release/wbuild/parachain-template-runtime/parachain_template_runtime.wasm named-preset development
-```
+- [ ] Off-chain worker integration
+- [ ] IPFS + OCW automated data syncing
+- [ ] Advanced search and filtering
 
-### Start `chopsticks` with the chain spec
+### Long Term
 
-```sh
-npx @acala-network/chopsticks@latest --chain-spec <path/to/chain_spec.json>
-```
+- [ ] Parachain deployment to Polkadot
+- [ ] Cross-chain messaging with other parachains
+- [ ] Enterprise partner onboarding tools
+- [ ] API gateway for third-party integrations
 
-### Alternatives
+PolkaLink is intentionally modular — we plan to keep extending it based on community feedback.
 
-`OmniNode` can be still used for runtime development if using the `--dev` flag, while `parachain-template-node` doesn't
-support it at this moment. It can still be used to test a runtime in a full setup where it is started alongside a
-relay chain network (see [Parachain Template node](#parachain-template-node) setup).
 
-## Contributing
 
-- 🔄 This template is automatically updated after releases in the main [Polkadot SDK monorepo](https://github.com/paritytech/polkadot-sdk).
+##  Contributing
 
-- ➡️ Any pull requests should be directed to this [source](https://github.com/paritytech/polkadot-sdk/tree/master/templates/parachain).
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-- 😇 Please refer to the monorepo's
-  [contribution guidelines](https://github.com/paritytech/polkadot-sdk/blob/master/docs/contributor/CONTRIBUTING.md) and
-  [Code of Conduct](https://github.com/paritytech/polkadot-sdk/blob/master/docs/contributor/CODE_OF_CONDUCT.md).
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## Getting Help
+##  Contact
 
-- 🧑‍🏫 To learn about Polkadot in general, [docs.Polkadot.com](https://docs.polkadot.com/) website is a good starting point.
+- GitHub: [Your GitHub Profile]
+- Email: [Your Email]
+- Project Link: [https://github.com/bernardev254/polkalink](https://github.com/bernardev254/polkalink)
 
-- 🧑‍🔧 For technical introduction, [here](https://github.com/paritytech/polkadot-sdk#-documentation) are
-  the Polkadot SDK documentation resources.
+##  Acknowledgments
 
-- 👥 Additionally, there are [GitHub issues](https://github.com/paritytech/polkadot-sdk/issues) and
-  [Substrate StackExchange](https://substrate.stackexchange.com/).
-- 👥You can also reach out on the [Official Polkdot discord server](https://polkadot-discord.w3f.tools/)
-- 🧑Reach out on [Telegram](https://t.me/substratedevs) for more questions and discussions
+- Polkadot and Substrate teams for excellent documentation
+- The Web3 Foundation for supporting blockchain innovation
+- All contributors and early adopters
